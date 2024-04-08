@@ -7,7 +7,12 @@ public class RoundRobin extends Scheduler{
     }
 
     @Override
-    public void executeprocess(PCB currentPCB) {
+    public void executePCB(PCB currentPCB) {
+        
+    }
+
+    @Override
+    public void runScheduler() {
 
     }
 }

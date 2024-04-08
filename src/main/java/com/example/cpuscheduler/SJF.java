@@ -3,8 +3,11 @@ package com.example.cpuscheduler;
 import java.util.Comparator;
 import java.util.PriorityQueue;
 import java.util.Queue;
+import java.util.concurrent.Semaphore;
 
 public class SJF extends Scheduler{
+
+
 
     PriorityQueue<PCB> queue ;
 
@@ -14,20 +17,36 @@ public class SJF extends Scheduler{
         queue =  new PriorityQueue<>(new MyCustomComparator());
     }
 
+    public SJF(PreOrNon preOrNon){
+        super(preOrNon);
+        queue =  new PriorityQueue<>(new MyCustomComparator());
+
+    }
+
     @Override
     public void add(PCB newpcb) {
-        table.add(newpcb);
+        super.add(newpcb);
         queue.add(newpcb);
-        newpcb.setArrivalTime(currentTime);
     }
 
     @Override
-    public void executeprocess(PCB currentPCB) {
+    public void executePCB(PCB currentPCB) {
 
     }
 
-//    public static void main (String [] args){
-//        SJF ss = new SJF();
+    @Override
+    public void runScheduler() {
+        PCB currentPcb;
+        while (true){
+            if(queue.isEmpty()) continue;
+
+
+
+        }
+    }
+
+    public static void main (String [] args){
+//        SJF ss = new SJF(PreOrNon.preemptive);
 //        PCB dd= new PCB(9);
 //        ss.add(dd);
 //        ss.add(new PCB(7));
@@ -42,8 +61,9 @@ public class SJF extends Scheduler{
 //            System.out.println(dd.getRemainingTime());
 //
 //        }
-//        System.out.println();
-//    }
+//        String m = String.format("ssdsd%-4sd","5");
+//        System.out.println(m);
+    }
 
 }
 
