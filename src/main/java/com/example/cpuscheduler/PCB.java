@@ -13,7 +13,7 @@ public class PCB {
 
 
     //constructors
-    public PCB( int priority, int burstTime) {
+    public PCB( int priority, int burstTime ) {
         this.processID = ++num;
         this.priority = priority;
         this.burstTime = burstTime;
@@ -29,6 +29,7 @@ public class PCB {
         this.remainingTime = burstTime;
         this.startTime = -1 ;
         this.finishTime = -1;
+
 
     }
 
@@ -91,5 +92,19 @@ public class PCB {
 
     public void setFinishTime(int finishTime) {
         this.finishTime = finishTime;
+    }
+
+    //di mmkn tkhali el remainning time bel negative fa khalo balko law el proccess
+    // di khelset shelouha mn el object structure beta3ko!
+    public void decrementRemainingTime(int currentTime){
+        if(startTime== -1 ){
+            setStartTime(currentTime);
+        }
+        remainingTime--;
+
+        if(remainingTime == 0 ){
+            finishTime =currentTime+1;
+        }
+
     }
 }
