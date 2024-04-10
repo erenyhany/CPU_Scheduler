@@ -7,10 +7,6 @@ public class FCFS  extends Scheduler{
 
     }
 
-    @Override
-    public void executePCB(PCB currentPCB) {
-
-    }
 
     @Override
     public void runScheduler() {

@@ -6,9 +6,6 @@ import java.util.Queue;
 import java.util.concurrent.Semaphore;
 
 public class SJF extends Scheduler{
-
-
-
     PriorityQueue<PCB> queue ;
 
 
@@ -29,28 +26,33 @@ public class SJF extends Scheduler{
         queue.add(newpcb);
     }
 
-    @Override
-    public void executePCB(PCB currentPCB) {
 
-    }
 
     @Override
     public void runScheduler() {
         PCB currentPcb;
-        while (true){
+        while (!stop){
             if(queue.isEmpty()) continue;
-
-
+            currentPcb = queue.poll();
+            executePCB(currentPcb);
+            if(currentPcb.getRemainingTime()!= 0 )
+                queue.add(currentPcb);
 
         }
     }
 
-    public static void main (String [] args){
-//        SJF ss = new SJF(PreOrNon.preemptive);
+//    public static void main (String [] args){
+//        SJF ss = new SJF(PreOrNon.nonPreemptive);
 //        PCB dd= new PCB(9);
 //        ss.add(dd);
+//
 //        ss.add(new PCB(7));
 //        ss.add(new PCB(10));
+//        ss.runScheduler();
+
+//        System.out.println(Scheduler.currentTime);
+
+//
 //
 //        for(int i = 0 ;i<3;i++){
 ////            System.out.println(ss.queue.peek().getRemainingTime());
@@ -63,7 +65,7 @@ public class SJF extends Scheduler{
 //        }
 //        String m = String.format("ssdsd%-4sd","5");
 //        System.out.println(m);
-    }
+//    }
 
 }
 

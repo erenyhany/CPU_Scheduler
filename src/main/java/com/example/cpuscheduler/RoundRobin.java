@@ -8,7 +8,14 @@ public class RoundRobin extends Scheduler{
 
     @Override
     public void executePCB(PCB currentPCB) {
-        
+
+        currentPCB.decrementRemainingTime(Scheduler.currentTime);
+
+        System.out.print(String.format("|%-4d",currentPCB.getProcessID()));
+
+        waitOneSecond();
+
+
     }
 
     @Override

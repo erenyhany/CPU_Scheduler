@@ -20,15 +20,18 @@ public class PCB {
         this.remainingTime = burstTime;
         this.startTime = -1 ;
         this.finishTime = -1 ;
+        this.arrivalTime = Scheduler.currentTime;
+
 
     }
 
     public PCB(int burstTime) {
-        this.processID = ++num;
+        this.processID =num++;
         this.burstTime = burstTime;
         this.remainingTime = burstTime;
         this.startTime = -1 ;
         this.finishTime = -1;
+        this.arrivalTime = Scheduler.currentTime;
 
 
     }
