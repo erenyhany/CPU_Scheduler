@@ -79,4 +79,27 @@ public abstract class Scheduler {
          }
          currentTime++;
      }
+
+     double getAverageWaiting (){
+         double acc =0;
+         for (PCB p: allPCBs) {
+             acc+=(p.getFinishTime()-p.getBurstTime()-p.getArrivalTime());
+         }
+         return acc/allPCBs.size();
+     }
+
+    double getAverageTurnArround (){
+        double acc =0;
+        for (PCB p: allPCBs) {
+            acc+=(p.getFinishTime()-p.getArrivalTime());
+        }
+        return acc/allPCBs.size();
+    }
+
+    void stop (){
+         stop = true;
+         //ereny khaliha f text field:
+        System.out.println("average waiting: "+ getAverageWaiting());
+        System.out.println("average turn arround: "+getAverageTurnArround());
+    }
 }

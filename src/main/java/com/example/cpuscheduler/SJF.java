@@ -30,6 +30,7 @@ public class SJF extends Scheduler{
 
     @Override
     public void runScheduler() {
+        stop = false;
         PCB currentPcb;
         while (!stop){
             if(queue.isEmpty()) continue;
