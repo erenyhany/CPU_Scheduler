@@ -49,5 +49,6 @@
          </font>
       </Label>
       <Label layoutX="288.0" layoutY="475.0" text="press stop ONLY after the execution of all the processes to display av. waiting time and av. turnarround" textFill="#e10d0d" />
+      <Label layoutX="236.0" layoutY="246.0" text="(if needed)" />
    </children>
 </Pane>
