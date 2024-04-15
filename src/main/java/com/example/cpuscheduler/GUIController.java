@@ -9,14 +9,23 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.TextFlow;
+
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.concurrent.Semaphore;
 
 
 public class GUIController implements Initializable {
+    public static Semaphore semaphore = new Semaphore(1);
+    public static boolean firsttime = true;
     @FXML
     private Button addButton;
 
+
+    @FXML
+    private TextArea grant;
+    private String currentString = "";
     @FXML
     private Button runButton;
 
@@ -110,7 +119,18 @@ public class GUIController implements Initializable {
 
     @FXML
     void run(MouseEvent event) {
+        currentString = s.str;
         new Thread(()->{ s.runScheduler();}).start();
+        new Thread(()-> {
+            while (!s.stop) {
+                try{
+                semaphore.acquire();
+                grant.appendText(s.str);
+            }catch(Exception e){
+                    System.out.println(e.toString());
+                }
+            }
+        }).start();
 
     }
 

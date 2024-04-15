@@ -1,6 +1,8 @@
 package com.example.cpuscheduler;
 
 import java.util.Vector;
+import java.util.concurrent.ExecutionException;
+
 enum PreOrNon{
     preemptive , nonPreemptive;
 }
@@ -9,6 +11,7 @@ enum PreOrNon{
 
 public abstract class Scheduler {
     int lastExacuted = -1 ;
+    String str = "";
     PreOrNon preOrNot ;
     boolean stop = false;
     static int currentTime = 0;
@@ -49,12 +52,22 @@ public abstract class Scheduler {
         //  ***shaklena msh hanehtagha***  4- update the table informations     xxxxxx haga mohema 3aiez 2a2olhaxxxx
     public void executePCB(PCB currentPCB){
         do{
+            if(GUIController.firsttime)
+            {
+                try{
+                    GUIController.semaphore.acquire();
+                    GUIController.firsttime=false;
+                }catch (Exception e){
+                    System.out.println(e.toString());
+                }
+            }
             currentPCB.decrementRemainingTime(Scheduler.currentTime);
             if(lastExacuted != currentPCB.getProcessID()){
-                System.out.print(String.format("|%-4d",currentPCB.getProcessID()));
+                str = String.format("|%-4d|",currentPCB.getProcessID());
             }else {
-                System.out.print("|    ");
+                str = "|    |";
             }
+            GUIController.semaphore.release();
             waitOneSecond();
             lastExacuted = currentPCB.getProcessID();
         }while(preOrNot == PreOrNon.nonPreemptive && currentPCB.getRemainingTime()!= 0);
