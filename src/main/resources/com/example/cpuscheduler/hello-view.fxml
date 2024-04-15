@@ -1,16 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
-
 <?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.cpuscheduler.GUIController">
-  <padding>
-    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-  </padding>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
 
-  <Label fx:id="welcomeText"/>
-  <Button text="Hello!" onAction="#onHelloButtonClick"/>
-</VBox>
+<Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="603.0" prefWidth="798.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cpuscheduler.GUIController">
+   <children>
+      <Button fx:id="stopButton" layoutX="489.0" layoutY="448.0" mnemonicParsing="false" onMouseClicked="#stop" prefHeight="27.0" prefWidth="98.0" text="Stop" />
+      <Button fx:id="runButton" layoutX="106.0" layoutY="510.0" mnemonicParsing="false" onMouseClicked="#run" prefHeight="27.0" prefWidth="98.0" text="Run scheduler" />
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="19.0" layoutY="178.0" prefHeight="25.0" prefWidth="219.0" text="Add a process" />
+      <Label layoutX="19.0" layoutY="70.0" text="Scheduler" />
+      <Label layoutX="17.0" layoutY="101.0" text="pre or non" />
+      <Label layoutX="19.0" layoutY="213.0" text="burst time" />
+      <TextField fx:id="bt" layoutX="81.0" layoutY="209.0" />
+      <Label layoutX="31.0" layoutY="284.0" />
+      <Label layoutX="25.0" layoutY="246.0" text="priority" />
+      <TextField fx:id="p" layoutX="82.0" layoutY="242.0" />
+      <Button fx:id="addButton" layoutX="128.0" layoutY="280.0" mnemonicParsing="false" onMouseClicked="#addProcess" prefHeight="25.0" prefWidth="54.0" text="Add" />
+      <Label alignment="CENTER" layoutX="18.0" layoutY="32.0" prefHeight="25.0" prefWidth="219.0" text="Choose scheduler" />
+      <ComboBox fx:id="c1" layoutX="82.0" layoutY="66.0" prefWidth="150.0" />
+      <ComboBox fx:id="c2" layoutX="80.0" layoutY="97.0" prefWidth="150.0" />
+      <Button fx:id="submitButton" layoutX="130.0" layoutY="144.0" mnemonicParsing="false" onMouseClicked="#submit" text="Submit" />
+      <TableView fx:id="table" layoutX="346.0" layoutY="19.0" prefHeight="266.0" prefWidth="384.0">
+        <columns>
+          <TableColumn fx:id="pid" prefWidth="75.0" text="Process id" />
+          <TableColumn fx:id="arr" prefWidth="66.4000244140625" text="arrival " />
+            <TableColumn fx:id="bur" prefWidth="68.79998779296875" text="burst" />
+            <TableColumn fx:id="rem" prefWidth="87.99993896484375" text="remaining" />
+            <TableColumn fx:id="fin" prefWidth="80.7998046875" text="finish" />
+        </columns>
+      </TableView>
+      <TextArea fx:id="textArea" layoutX="351.0" layoutY="494.0" prefHeight="59.0" prefWidth="375.0" />
+   </children>
+</Pane>
