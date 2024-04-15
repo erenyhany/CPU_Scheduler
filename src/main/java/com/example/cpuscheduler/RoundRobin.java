@@ -1,6 +1,11 @@
 package com.example.cpuscheduler;
 
 public class RoundRobin extends Scheduler{
+     public RoundRobin(PreOrNon preOrNon){
+        super(preOrNon);
+
+
+    }
     @Override
     public void add(PCB newpcb) {
 
