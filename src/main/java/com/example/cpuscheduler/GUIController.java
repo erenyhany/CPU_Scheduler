@@ -1,5 +1,6 @@
 package com.example.cpuscheduler;
 
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -40,17 +41,17 @@ public class GUIController implements Initializable {
     @FXML
     private Pane pane;
     @FXML
-    private TableColumn<PCB, Integer> pid;
+    private TableColumn<PCB, SimpleIntegerProperty> pid;
 
     @FXML
-    private TableColumn<PCB, Integer> rem;
+    private TableColumn<PCB, SimpleIntegerProperty> rem;
     @FXML
-    private TableColumn<PCB, Integer> arr;
+    private TableColumn<PCB, SimpleIntegerProperty> arr;
 
     @FXML
-    private TableColumn<PCB, Integer> bur;
+    private TableColumn<PCB, SimpleIntegerProperty> bur;
     @FXML
-    private TableColumn<PCB, Integer> fin;
+    private TableColumn<PCB, SimpleIntegerProperty> fin;
     @FXML
     private TableView<PCB> table;
 
@@ -118,6 +119,7 @@ public class GUIController implements Initializable {
 
         s.stop();
         String str=null;
+        textArea.clear();
         textArea.appendText("average waiting: " + str.valueOf(s.getAverageWaiting())+
                 "\naverage turn around: "+ str.valueOf(s.getAverageTurnArround()));
 
@@ -137,13 +139,15 @@ public class GUIController implements Initializable {
         c1.setItems(FXCollections.observableArrayList("FCFS","SJF","Priority","RoundRobin"));
         c2.setItems(FXCollections.observableArrayList("preemptive","nonPreemptive"));
 
-        rem.setCellValueFactory(new PropertyValueFactory<PCB,Integer>("remainingTime"));
-        bur.setCellValueFactory(new PropertyValueFactory<PCB,Integer>("burstTime"));
-        arr.setCellValueFactory(new PropertyValueFactory<PCB,Integer>("arrivalTime"));
-        pid.setCellValueFactory(new PropertyValueFactory<PCB,Integer>("processID"));
-        fin.setCellValueFactory(new PropertyValueFactory<PCB,Integer>("finishTime"));
+        rem.setCellValueFactory(new PropertyValueFactory<PCB,SimpleIntegerProperty >("rem"));
+        bur.setCellValueFactory(new PropertyValueFactory<PCB,SimpleIntegerProperty>("bur"));
+        arr.setCellValueFactory(new PropertyValueFactory<PCB,SimpleIntegerProperty>("arr"));
+        pid.setCellValueFactory(new PropertyValueFactory<PCB,SimpleIntegerProperty>("pid"));
+        fin.setCellValueFactory(new PropertyValueFactory<PCB,SimpleIntegerProperty>("fin"));
+
 
         table.setItems(list);
+
 
     }
 }
