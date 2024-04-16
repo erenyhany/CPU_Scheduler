@@ -29,7 +29,14 @@ public class Priority extends Scheduler{
         stop = false;
         PCB currentPcb;
         while(!stop){
-            if(priQueue.isEmpty()) continue;
+            if(priQueue.isEmpty()) {
+                try {
+                    semaSched.acquire();
+                }catch (Exception e){
+                    System.out.println(e.toString());
+                }
+                continue;
+            }
             currentPcb = priQueue.poll();
             executePCB(currentPcb);
             if(currentPcb.getRemainingTime()!= 0 )

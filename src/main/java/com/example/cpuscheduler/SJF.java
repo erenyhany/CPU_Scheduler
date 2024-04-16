@@ -33,7 +33,14 @@ public class SJF extends Scheduler{
         stop = false;
         PCB currentPcb;
         while (!stop){
-            if(queue.isEmpty()) continue;
+            if(queue.isEmpty()) {
+                try {
+                    semaSched.acquire();
+                }catch (Exception e){
+                    System.out.println(e.toString());
+                }
+                continue;
+            }
             currentPcb = queue.poll();
             executePCB(currentPcb);
             if(currentPcb.getRemainingTime()!= 0 )
@@ -42,31 +49,7 @@ public class SJF extends Scheduler{
         }
     }
 
-//    public static void main (String [] args){
-//        SJF ss = new SJF(PreOrNon.nonPreemptive);
-//        PCB dd= new PCB(9);
-//        ss.add(dd);
-//
-//        ss.add(new PCB(7));
-//        ss.add(new PCB(10));
-//        ss.runScheduler();
 
-//        System.out.println(Scheduler.currentTime);
-
-//
-//
-//        for(int i = 0 ;i<3;i++){
-////            System.out.println(ss.queue.peek().getRemainingTime());
-////            ss.waitOneSecond();
-////            ss.queue.poll();
-//            dd.decrementRemainingTime(ss.currentTime);
-//            ss.waitOneSecond();
-//            System.out.println(dd.getRemainingTime());
-//
-//        }
-//        String m = String.format("ssdsd%-4sd","5");
-//        System.out.println(m);
-//    }
 
 }
 

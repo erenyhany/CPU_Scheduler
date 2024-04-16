@@ -2,6 +2,7 @@ package com.example.cpuscheduler;
 
 import java.util.Vector;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Semaphore;
 
 enum PreOrNon{
     preemptive , nonPreemptive;
@@ -17,7 +18,7 @@ public abstract class Scheduler {
     static int currentTime = 0;
     Vector<PCB> allPCBs ;
 //    Vector<String> table;
-
+    Semaphore semaSched = new Semaphore(1);
     public Scheduler(){
         currentTime = 0;
         allPCBs = new Vector<>();
@@ -35,21 +36,15 @@ public abstract class Scheduler {
 
     }
 
-    //kol wahed haiendah el super then haizawed el pcb di fl object structure beta3o
-    //lesa ereny hatzawed hena lel observable list
+
      public  void add(PCB newpcb){
+
          allPCBs.add(newpcb);
-//         table.add(String.format("p%-3darrial time:%-3dremaining:%d"));
          newpcb.setArrivalTime(currentTime);
+         semaSched.release();
      };
 
-//    public void updateTable(int pcbID){
-//        table.
-//    }
-     //di 1-hancall fiha el decremenetremainingtime lel process el haiet3emeleha execute,
-        // 2- nersem moraba3 3ala hasab nou3o
-        //  3-ba3d kda ne3mel delay 1 second gowa el function b waitOneSecond()
-        //  ***shaklena msh hanehtagha***  4- update the table informations     xxxxxx haga mohema 3aiez 2a2olhaxxxx
+
     public void executePCB(PCB currentPCB){
         do{
             if(GUIController.firsttime)
@@ -111,8 +106,6 @@ public abstract class Scheduler {
 
     void stop (){
          stop = true;
-         //ereny khaliha f text field:
-        System.out.println("average waiting: "+ getAverageWaiting());
-        System.out.println("average turn arround: "+getAverageTurnArround());
+
     }
 }

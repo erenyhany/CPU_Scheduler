@@ -20,7 +20,14 @@ public class FCFS  extends Scheduler{
         stop = false;
         PCB currentPcb;
         while(!stop){
-            if(queue.isEmpty()) continue;
+            if(queue.isEmpty()) {
+                try {
+                    semaSched.acquire();
+                }catch (Exception e){
+                    System.out.println(e.toString());
+                }
+                continue;
+            }
             currentPcb = queue.poll();
             executePCB(currentPcb);
         }

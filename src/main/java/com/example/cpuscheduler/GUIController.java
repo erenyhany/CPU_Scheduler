@@ -66,6 +66,7 @@ public class GUIController implements Initializable {
 
     Scheduler s;
     ObservableList<PCB> list =FXCollections.observableArrayList();
+    private boolean readytoRun = false;
 
     @FXML
     void submit(MouseEvent event) {
@@ -94,11 +95,13 @@ public class GUIController implements Initializable {
             s = new RoundRobin(PreOrNon.preemptive);
         }
 
+        readytoRun = true ;
 
     }
 
     @FXML
     void addProcess(MouseEvent event) {
+        if(s==null){return ;}
         PCB process;
         if (c1.getSelectionModel().getSelectedItem().toString().equals("Priority")) {
             process = new PCB(Integer.parseInt(p.getText()), Integer.parseInt(bt.getText()));
@@ -119,6 +122,8 @@ public class GUIController implements Initializable {
 
     @FXML
     void run(MouseEvent event) {
+        if(!readytoRun)return ;
+        readytoRun =  false;   //to avoid pressing many times on run button
         currentString = s.str;
         new Thread(()->{ s.runScheduler();}).start();
         new Thread(()-> {
