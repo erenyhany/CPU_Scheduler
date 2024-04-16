@@ -99,12 +99,17 @@ public class GUIController implements Initializable {
 
     }
 
-    @FXML
+   @FXML
     void addProcess(MouseEvent event) {
-        if(s==null){return ;}
         PCB process;
         if (c1.getSelectionModel().getSelectedItem().toString().equals("Priority")) {
-            process = new PCB(Integer.parseInt(p.getText()), Integer.parseInt(bt.getText()));
+            if(p.getText().isEmpty()){
+                process = new PCB(5, Integer.parseInt(bt.getText()));
+                System.out.println(process.getPriority());}
+            else
+            {  process = new PCB(Integer.parseInt(p.getText()), Integer.parseInt(bt.getText()));
+                System.out.println(process.getPriority());}
+
 
         } else {
             process = new PCB(Integer.parseInt(bt.getText()));
